@@ -8,7 +8,7 @@ IF %errorlevel% neq 0 (
 )
 :UACPrompt
 	ECHO SET UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-	SET params = %*:"=""^M
+	SET params = %*:"=""
 	ECHO UAC.ShellExecute "cmd.exe", "/c %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
 	"%temp%\getadmin.vbs"
 	DEL "%temp%\getadmin.vbs"
