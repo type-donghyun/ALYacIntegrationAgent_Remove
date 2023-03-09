@@ -46,7 +46,6 @@ SET "EchoLightRed=%_psc% write-host -back Black -fore Red"
 SET "EchoLightPurple=%_psc% write-host -back Black -fore Magenta"
 SET "EchoLightYellow=%_psc% write-host -back Black -fore Yellow"
 SET "EchoBrightWhite=%_psc% write-host -back Black -fore White"
-SET "ErrLine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 ::_____________________________________________________________________________________________________________________________________________________________
 
@@ -64,6 +63,6 @@ IF %errorlevel% equ 1 (
 	COPY "bat\ALYacIntegrationAgent_Remove.bat" "%UserProfile%\desktop\저를 실행해주세요!.bat" > nul
 	SHUTDOWN /r /t 3 /c "안전모드로 다시 시작합니다." /f
 ) ELSE IF %errorlevel% equ 2 (
-	ECHO 작업을 합니다.
+	ECHO 작업을 취소합니다.
 	TIMEOUT /t 3 > nul
 )
