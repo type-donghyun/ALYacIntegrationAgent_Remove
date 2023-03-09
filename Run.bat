@@ -2,10 +2,10 @@
 ::================================================================================관리자 권한 요청
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 IF %errorlevel% NEQ 0 (
-	echo Requesting administrative privileges...
-	goto UACPrompt
+	ECHO Requesting administrative privileges...
+	GOTO UACPrompt
 ) ELSE (
-	goto gotAdmin
+	GOTO gotAdmin
 )
 
 :UACPrompt
