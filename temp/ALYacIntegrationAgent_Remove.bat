@@ -46,11 +46,11 @@ SET "EchoLightRed=%_psc% write-host -back Black -fore Red"
 SET "EchoLightPurple=%_psc% write-host -back Black -fore Magenta"
 SET "EchoLightYellow=%_psc% write-host -back Black -fore Yellow"
 SET "EchoBrightWhite=%_psc% write-host -back Black -fore White"
-SET "ErrLine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 ::_____________________________________________________________________________________________________________________________________________________________
 
 CHCP 65001 > nul
+Title 알약 제거
 
 ECHO 알약 통합에이전트 제거를 위한 작업입니다.
 ECHO Uninstall 권한이 없어 프로그램 파일과 레지스트리를 직접 제거합니다.
