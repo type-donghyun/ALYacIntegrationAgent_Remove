@@ -1,25 +1,30 @@
 @ECHO OFF
-::================================================================================관리자 권한 요청
+::_____________________________________________________________________________________________________________________________________________________________
+:: 관리자 권한 요청
+
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-IF %errorlevel% NEQ 0 (
+
+IF %errorlevel% neq 0 (
 	GOTO UACPrompt
 ) ELSE (
 	GOTO gotAdmin
 )
 
 :UACPrompt
-ECHO Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-ECHO UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
-"%temp%\getadmin.vbs"
-EXIT /B
+	ECHO SET UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+	ECHO UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+	"%temp%\getadmin.vbs"
+	EXIT /B
 
 :gotAdmin
-IF EXIST "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
-PUSHD "%CD%"
-CD /D "%~dp0"
-::====================================================================================================
+	IF EXIST "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+	PUSHD "%CD%"
+	CD /D "%~dp0"
 
-::================================================================================ECHO 색상 설정
+::_____________________________________________________________________________________________________________________________________________________________
+:: ECHO 색상 설정
+
 SET _elev=
 IF /i "%~1"=="-el" SET _elev=1
 FOR /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
@@ -42,9 +47,10 @@ SET "EchoLightPurple=%_psc% write-host -back Black -fore Magenta"
 SET "EchoLightYellow=%_psc% write-host -back Black -fore Yellow"
 SET "EchoBrightWhite=%_psc% write-host -back Black -fore White"
 SET "ErrLine=echo: & %EchoRed% ==== ERROR ==== &echo:"
-::====================================================================================================
 
-CHCP 65001 >nul
+::_____________________________________________________________________________________________________________________________________________________________
+
+CHCP 65001 > nul
 
 ECHO 알약 통합에이전트 제거를 위한 작업입니다.
 ECHO Uninstall 권한이 없어 프로그램 파일과 레지스트리를 직접 제거합니다.
@@ -59,14 +65,14 @@ IF %errorlevel% equ 1 (
 ECHO ====================================================
 %echored% 백그라운드에서 동작 중인 알약 프로세스를 강제로 종료
 ECHO ====================================================
-TASKKILL /im "AYCUpdSrv.ayc" /t /f 2>nul
-TIMEOUT /t 2 >nul
+TASKKILL /im "AYCUpdSrv.ayc" /t /f 2> nul
+TIMEOUT /t 2 > nul
 
 CLS
 ECHO ==================
 %echoyellow% 디렉토리 제거 시작
 ECHO ==================
-TIMEOUT /t 2 >nul
+TIMEOUT /t 2 > nul
 
 CLS
 RD /s /q "%Program Files%\ESTsoft"
@@ -77,13 +83,13 @@ CLS
 ECHO ==================
 %echogreen% 디렉토리 제거 완료
 ECHO ==================
-TIMEOUT /t 2 >nul
+TIMEOUT /t 2 > nul
 
 CLS
 ECHO ==============
 %echoyellow% 파일 제거 시작
 ECHO ==============
-TIMEOUT /t 2 >nul
+TIMEOUT /t 2 > nul
 
 CLS
 DEL /s /q "%ProgramData%\Microsoft\Windows\Start menu\알약.lnk"
@@ -93,13 +99,13 @@ CLS
 ECHO ==============
 %echogreen% 파일 제거 완료
 ECHO ==============
-TIMEOUT /t 2 >nul
+TIMEOUT /t 2 > nul
 
 CLS
 ECHO ====================
 %echoyellow% 레지스트리 제거 시작
 ECHO ====================
-TIMEOUT /t 2 >nul
+TIMEOUT /t 2 > nul
 
 CLS
 REG QUERY "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\UFH\SHC" /f "C:\Program Files\ESTsoft\ALYac\AYCLaunch.exe" | FIND /i "C:\Program Files\ESTsoft\ALYac\AYCLaunch.exe" >> "%temp%\ALYacIntegrationAgentRemove.log"
@@ -171,10 +177,10 @@ CLS
 ECHO ====================
 %echogreen% 레지스트리 제거 완료
 ECHO ====================
-TIMEOUT /t 2 >nul
+TIMEOUT /t 2 > nul
 
 :End
 CLS
 BCDEDIT /deletevalue {current} safeboot > nul
 SHUTDOWN /r /t 5 /c "안전모드 해제 후, 다시 시작합니다." /f
-DEL /s /q "%UserProfile%\desktop\저를 실행해주세요!.bat" 2>nul
+DEL /s /q "%UserProfile%\desktop\저를 실행해주세요!.bat" 2> nul
