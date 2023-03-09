@@ -1,21 +1,23 @@
 @ECHO OFF
 ::================================================================================관리자 권한 요청
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-IF %errorlevel% neq 0 (
-	GOTO UACPrompt
+IF %errorlevel% NEQ 0 (
+	echo Requesting administrative privileges...
+	goto UACPrompt
 ) ELSE (
-	GOTO gotAdmin
+	goto gotAdmin
 )
+
 :UACPrompt
-	ECHO SET UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-	SET params = %*:"=""
-	ECHO UAC.ShellExecute "cmd.exe", "/c %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
-	"%temp%\getadmin.vbs"
-	DEL "%temp%\getadmin.vbs"
-	EXIT /b
+ECHO Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+ECHO UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+"%temp%\getadmin.vbs"
+EXIT /B
+
 :gotAdmin
+IF EXIST "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
 PUSHD "%CD%"
-	CD /d "%~dp0"
+CD /D "%~dp0"
 ::====================================================================================================
 
 ::================================================================================ECHO 색상 설정
