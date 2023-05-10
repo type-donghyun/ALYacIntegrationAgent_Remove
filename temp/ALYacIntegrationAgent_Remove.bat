@@ -50,8 +50,8 @@ ECHO ● 백그라운드에서 동작 중인 알약 프로세스를 강제로 �
 ECHO ● 디렉토리 제거 시작
 
 ECHO ○ 바로가기 제거 시작
-DEL /s /q "%ProgramData%\Microsoft\Windows\Start menu\알약.lnk"
-DEL /s /q "%UserProfile%\Desktop\알약.lnk"
+DEL /s /q "%ProgramData%\Microsoft\Windows\Start menu\알약"
+DEL /s /q "%UserProfile%\Desktop\알약"
 CLS
 ECHO ● 백그라운드에서 동작 중인 알약 프로세스를 강제로 종료
 ECHO ● 디렉토리 제거 시작
