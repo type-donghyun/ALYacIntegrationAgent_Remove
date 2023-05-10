@@ -35,7 +35,7 @@ CHOICE /c 12 /n /t 10 /d 2 /m "안전모드로 변경 후 다시 시작하시겠
 CLS
 IF %errorlevel% equ 1 (
 	BCDEDIT /set {current} safeboot minimal > nul
-	COPY "temp\ALYacIntegrationAgent_Remove.bat" "%UserProfile%\desktop\저를 실행해주세요!.bat" > nul
+	COPY "temp\ALYacIntegrationAgent_Remove.bat" "%UserProfile%\desktop\ALYacIntegrationAgent_Remove.bat" > nul
 	SHUTDOWN /r /t 3 /c "안전모드로 다시 시작합니다." /f
 ) ELSE IF %errorlevel% equ 2 (
 	ECHO 작업을 취소합니다.
