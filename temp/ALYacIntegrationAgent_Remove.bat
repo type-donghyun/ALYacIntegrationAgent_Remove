@@ -39,22 +39,23 @@ IF %errorlevel% equ 1 (
 
 ECHO ○ 백그라운드에서 동작 중인 알약 프로세스를 강제로 종료
 ECHO.
-TASKKILL /im "AYCUpdSrv.ayc" /t /f 2>nul
+TASKKILL /im "AYCUpdSrv.ayc" /t /f
 CLS
 ECHO ● 백그라운드에서 동작 중인 알약 프로세스를 강제로 종료
 
 ECHO ○ 디렉토리 제거 시작
 ECHO.
-RD /s /q "%Program Files%\ESTsoft" 2>nul
-RD /s /q "%ProgramData%\ESTsoft" 2>nul
-RD /s /q "%ProgramData%\Microsoft\Windows\Start Menu\Programs\이스트소프트"  2>nul
+RMDIR /s /q "%ProgramFiles%\ESTsoft"
+RMDIR /s /q "%ProgramData%\ESTsoft"
+RMDIR /s /q "%ProgramData%\Microsoft\Windows\Start Menu\Programs\이스트소프트" 
 ECHO ● 백그라운드에서 동작 중인 알약 프로세스를 강제로 종료
 ECHO ● 디렉토리 제거 시작
 
 ECHO ○ 바로가기 제거 시작
 ECHO.
-DEL /s /q "%ProgramData%\Microsoft\Windows\Start menu\알약"
-DEL /s /q "%UserProfile%\Desktop\알약"
+DEL /s /q "%ProgramData%\Microsoft\Windows\Start menu\알약.lnk"
+DEL /s /q "%UserProfile%\Desktop\알약.lnk"
+DEL /s /q "C:\Users\Public\Desktop\알약.lnk"
 CLS
 ECHO ● 백그라운드에서 동작 중인 알약 프로세스를 강제로 종료
 ECHO ● 디렉토리 제거 시작
@@ -99,4 +100,4 @@ ECHO ● 레지스트리 제거 완료
 :End
 BCDEDIT /deletevalue {current} safeboot >nul
 SHUTDOWN /r /t 5 /c "안전모드 해제 후, 다시 시작합니다." /f
-DEL /s /q "%UserProfile%\desktop\저를 실행해주세요!.bat" 2>nul
+DEL /s /q "%UserProfile%\desktop\ALYacIntegrationAgent_Remove.bat"
